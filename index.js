@@ -6,6 +6,8 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import passport from "passport";
 import cors from "cors";
+import JWTHelper from "./helpers/JWTHelper.js";
+import { dbConnect } from "./config/dbConnect.js";
 configDotenv({
   path: "./config/config.env",
 });
@@ -13,6 +15,10 @@ configDotenv({
 const app = express();
 
 app.use(errorHandler);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+dbConnect(); 
 
 app.use(cookieParser);
 app.use(
